@@ -17,18 +17,6 @@ public struct GSProgressSectionMetadata {
     }
 }
 
-public enum GSRandomizedDelay {
-    case noDelay
-    case constantDelay(delay: CGFloat)
-    case randomizedDelay(delayRange: ClosedRange<CGFloat>)
-}
-
-public enum GSAnimationType {
-    case linear(duration: CGFloat)
-    case sectioned(sections: [GSProgressSectionMetadata])
-    case randomized(configuration: GSRandomizedConfiguration)
-}
-
 public struct GSRandomizedConfiguration {
     public let sectionsRange: ClosedRange<Int>
     public let durationRange: ClosedRange<Double>
