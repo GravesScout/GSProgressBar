@@ -21,129 +21,88 @@ public struct GSRandomizedConfiguration {
     public let sectionsRange: ClosedRange<Int>
     public let durationRange: ClosedRange<Double>
     public let sectionsDelay: GSRandomizedDelay
+    
+    public init(sectionsRange: ClosedRange<Int>, durationRange: ClosedRange<Double>, sectionsDelay: GSRandomizedDelay) {
+        self.sectionsRange = sectionsRange
+        self.durationRange = durationRange
+        self.sectionsDelay = sectionsDelay
+    }
 }
 
-public struct GSProgressBar: View {
-    private var progressUpdater: GSProgressUpdater?
+public struct GSProgressBar: View, Equatable {
+    private let progressUpdater: GSProgressUpdater?
     private let type: GSProgressBarType
-    private let configuration: GSProgressBarConfiguration
-    
-    @State private var animationTicker: Timer.TimerPublisher = .init(interval: 1/60, runLoop: .main, mode: .common)
-    @State private var sectionDelayTask: DispatchWorkItem?
-
-    @State private var currentSection: GSProgressSectionMetadata
-    @State private var animationTickerCancellable: Cancellable?
-
-    @State private var currentSectionIndex: Int = 0
-    @State private var progress: CGFloat = 0.0 {
-        didSet {
-            progressUpdater?(progress)
-        }
-    }
-    @State private var nextStopValue: CGFloat = 0.0
-    
-    private var advancementDelta: CGFloat {
-        currentSection.sectionProportionValue/(60.0*currentSection.duration)
-    }
-    
-    public init(type: GSProgressBarType, 
+    private let animationType: GSAnimationType
+    @Binding var play: Bool
+    public init(type: GSProgressBarType,
                 animationType: GSAnimationType,
-                progressUpdater: GSProgressUpdater? = nil
-    ) {
+                progressUpdater: GSProgressUpdater? = nil,
+                play: Binding<Bool>) {
         self.type = type
-        self.configuration = .init(progressAnimationConfiguration: animationType)
-        _currentSection = State(initialValue:configuration.sectionsDurations[0])
-        _nextStopValue = State(initialValue:currentSection.sectionProportionValue)
+        self.animationType = animationType
         self.progressUpdater = progressUpdater
+        _play = play
     }
-
     
     public var body: some View {
-        ZStack {
-            Circle()
-                .stroke(.gray,lineWidth: 16)
-                .shadow(color:.blue, radius: 5)
-            Circle()
-                .trim(from: 0, to: progress)
-                .rotation(.degrees(-90))
-                .stroke(.blue, style: StrokeStyle(lineWidth: 14, lineCap: .round))
-            
-        }
-        .onAppear {
-            connect()
-        }
-        .onReceive(animationTicker) { _ in
-            guard progress < nextStopValue else {
-                progress = nextStopValue
-                sectionDelay()
-                return
-            }
-            withAnimation {
-                progress += advancementDelta
-            }
-        }
+        GSProgressBarWrapper(type: type, animationType: animationType, progressUpdater: progressUpdater, play: $play)
     }
     
-    private func updateSection() {
-        currentSectionIndex += 1
-        guard currentSectionIndex < configuration.sectionsDurations.count else { pause(); return }
-        currentSection = configuration.sectionsDurations[currentSectionIndex]
-        nextStopValue += currentSection.sectionProportionValue
+    public static func == (lhs: GSProgressBar, rhs: GSProgressBar) -> Bool {
+        return true
     }
-    
-    private func sectionDelay() {
-        guard currentSection.sectionDelay > 0 else { updateSection(); return }
-        pause()
+}
 
-        sectionDelayTask = DispatchWorkItem {
-            updateSection()
-            connect()
+struct GSProgressBarWrapper: View {
+    private let progressUpdater: GSProgressUpdater?
+    private let type: GSProgressBarType
+    private let configuration: GSProgressBarConfiguration
+    @Binding var play: Bool
+    
+    public init(type: GSProgressBarType,
+                animationType: GSAnimationType,
+                progressUpdater: GSProgressUpdater? = nil,
+                play: Binding<Bool>) {
+        self.type = type
+        self.configuration = .init(progressAnimationConfiguration: animationType)
+        self.progressUpdater = progressUpdater
+        _play = play
+    }
+    
+    var body: some View {
+        switch type {
+        case .linear:
+            EmptyView()
+        case .circular:
+            GSCircularProgressBar(configuration: configuration, progressUpdater: progressUpdater, play: $play)
+        case .customPath:
+            EmptyView()
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + currentSection.sectionDelay, execute: sectionDelayTask!)
-    }
-
-    private func connect() {
-        animationTicker = .init(interval: 1/60, runLoop: .main, mode: .common)
-        animationTickerCancellable = animationTicker.connect()
-    }
-    
-    public func nextSection() {
-        updateSection()
-    }
-    
-    public func start() {
-        connect()
-    }
-    
-    public func pause() {
-        sectionDelayTask?.cancel()
-        animationTickerCancellable?.cancel()
     }
 }
 
 #Preview("Linear") {
-    GSProgressBar(type: .circular, animationType: .linear(duration: 5))
+    GSProgressBar(type: .circular, animationType: .linear(duration: 5), play: .constant(true))
     .frame(width: 150, height: 150)
 }
 #Preview("Sectioned") {
     GSProgressBar(type: .circular, animationType: .sectioned(sections: [
         .init(duration: 3, sectionProportionValue: 0.3, sectionDelay: 2),
             .init(duration: 1.5, sectionProportionValue: 0.6, sectionDelay: 4),
-            .init(duration: 5, sectionProportionValue: 0.1)]))
+            .init(duration: 5, sectionProportionValue: 0.1)]), play: .constant(true))
     .frame(width: 150, height: 150)
 }
 #Preview("Randomized no delay") {
-    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .noDelay)))
+    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 2...2, durationRange: 1...5, sectionsDelay: .noDelay)), play: .constant(true))
     .frame(width: 150, height: 150)
 }
 #Preview("Randomized constant delay") {
-    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .constantDelay(delay: 1.2))))
+    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .constantDelay(delay: 1.2))), play: .constant(true))
     .frame(width: 150, height: 150)
     
 }
 #Preview("Randomized random delay") {
-    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .randomizedDelay(delayRange: 0.4...5))))
+    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .randomizedDelay(delayRange: 0.4...5))), play: .constant(true))
     
     .frame(width: 150, height: 150)
 }
