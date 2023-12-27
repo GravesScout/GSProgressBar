@@ -17,27 +17,28 @@ public struct GSProgressSectionMetadata {
     }
 }
 
-public struct GSRandomizedConfiguration {
-    public let sectionsRange: ClosedRange<Int>
-    public let durationRange: ClosedRange<Double>
-    public let sectionsDelay: GSRandomizedDelay
-}
-
 public enum GSRandomizedDelay {
     case noDelay
     case constantDelay(delay: CGFloat)
     case randomizedDelay(delayRange: ClosedRange<CGFloat>)
 }
+
 public enum GSAnimationType {
     case linear(duration: CGFloat)
     case sectioned(sections: [GSProgressSectionMetadata])
     case randomized(configuration: GSRandomizedConfiguration)
 }
 
+public struct GSRandomizedConfiguration {
+    public let sectionsRange: ClosedRange<Int>
+    public let durationRange: ClosedRange<Double>
+    public let sectionsDelay: GSRandomizedDelay
+}
+
 public struct GSProgressBar: View {
     private var progressUpdater: GSProgressUpdater?
     private let type: GSProgressBarType
-    private let sectionsDurations: [GSProgressSectionMetadata]
+    private let configuration: GSProgressBarConfiguration
     
     @State private var animationTicker: Timer.TimerPublisher = .init(interval: 1/60, runLoop: .main, mode: .common)
     @State private var sectionDelayTask: DispatchWorkItem?
@@ -57,12 +58,13 @@ public struct GSProgressBar: View {
         currentSection.sectionProportionValue/(60.0*currentSection.duration)
     }
     
-    public init(type: GSProgressBarType, sectionsDurations: [GSProgressSectionMetadata],
+    public init(type: GSProgressBarType, 
+                animationType: GSAnimationType,
                 progressUpdater: GSProgressUpdater? = nil
     ) {
         self.type = type
-        self.sectionsDurations = sectionsDurations
-        _currentSection = State(initialValue:sectionsDurations[0])
+        self.configuration = .init(progressAnimationConfiguration: animationType)
+        _currentSection = State(initialValue:configuration.sectionsDurations[0])
         _nextStopValue = State(initialValue:currentSection.sectionProportionValue)
         self.progressUpdater = progressUpdater
     }
@@ -96,8 +98,8 @@ public struct GSProgressBar: View {
     
     private func updateSection() {
         currentSectionIndex += 1
-        guard currentSectionIndex < sectionsDurations.count else { pause(); return }
-        currentSection = sectionsDurations[currentSectionIndex]
+        guard currentSectionIndex < configuration.sectionsDurations.count else { pause(); return }
+        currentSection = configuration.sectionsDurations[currentSectionIndex]
         nextStopValue += currentSection.sectionProportionValue
     }
     
@@ -132,10 +134,28 @@ public struct GSProgressBar: View {
     }
 }
 
-#Preview {
-    GSProgressBar(type: .circular, sectionsDurations: [
+#Preview("Linear") {
+    GSProgressBar(type: .circular, animationType: .linear(duration: 5))
+    .frame(width: 150, height: 150)
+}
+#Preview("Sectioned") {
+    GSProgressBar(type: .circular, animationType: .sectioned(sections: [
         .init(duration: 3, sectionProportionValue: 0.3, sectionDelay: 2),
             .init(duration: 1.5, sectionProportionValue: 0.6, sectionDelay: 4),
-            .init(duration: 5, sectionProportionValue: 0.1)])
+            .init(duration: 5, sectionProportionValue: 0.1)]))
+    .frame(width: 150, height: 150)
+}
+#Preview("Randomized no delay") {
+    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .noDelay)))
+    .frame(width: 150, height: 150)
+}
+#Preview("Randomized constant delay") {
+    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .constantDelay(delay: 1.2))))
+    .frame(width: 150, height: 150)
+    
+}
+#Preview("Randomized random delay") {
+    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .randomizedDelay(delayRange: 0.4...5))))
+    
     .frame(width: 150, height: 150)
 }
