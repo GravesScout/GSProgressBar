@@ -11,7 +11,7 @@ import SwiftUI
 struct GSProgressBarExampleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView2()
+            ContentView()
         }
     }
 }
