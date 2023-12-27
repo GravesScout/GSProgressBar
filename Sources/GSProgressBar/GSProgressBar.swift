@@ -36,8 +36,8 @@ public struct GSProgressBar: View, Equatable {
     @Binding var play: Bool
     public init(type: GSProgressBarType,
                 animationType: GSAnimationType,
-                progressUpdater: GSProgressUpdater? = nil,
-                play: Binding<Bool>) {
+                play: Binding<Bool>,
+                progressUpdater: GSProgressUpdater? = nil) {
         self.type = type
         self.animationType = animationType
         self.progressUpdater = progressUpdater
