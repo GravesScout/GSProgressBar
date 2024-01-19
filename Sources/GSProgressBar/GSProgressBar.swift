@@ -5,35 +5,12 @@
 import SwiftUI
 import Combine
 
-public struct GSProgressSectionMetadata {
-    let duration: CGFloat
-    let sectionProportionValue: CGFloat
-    let sectionDelay: CGFloat
-    
-    public init(duration: CGFloat, sectionProportionValue: CGFloat, sectionDelay: CGFloat = 0.0) {
-        self.duration = duration
-        self.sectionProportionValue = sectionProportionValue
-        self.sectionDelay = sectionDelay
-    }
-}
-
-public struct GSRandomizedConfiguration {
-    public let sectionsRange: ClosedRange<Int>
-    public let durationRange: ClosedRange<Double>
-    public let sectionsDelay: GSRandomizedDelay
-    
-    public init(sectionsRange: ClosedRange<Int>, durationRange: ClosedRange<Double>, sectionsDelay: GSRandomizedDelay) {
-        self.sectionsRange = sectionsRange
-        self.durationRange = durationRange
-        self.sectionsDelay = sectionsDelay
-    }
-}
-
 public struct GSProgressBar: View, Equatable {
     private let progressUpdater: GSProgressUpdater?
     private let type: GSProgressBarType
     private let animationType: GSAnimationType
     @Binding var play: Bool
+    
     public init(type: GSProgressBarType,
                 animationType: GSAnimationType,
                 play: Binding<Bool>,
