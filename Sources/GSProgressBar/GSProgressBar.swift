@@ -60,14 +60,35 @@ struct GSProgressBarWrapper: View {
     private let configuration: GSProgressBarConfiguration
     @Binding private var play: Bool
     
+    @State private var animationTicker: Timer.TimerPublisher = .init(interval: 1/60, runLoop: .main, mode: .common)
+    @State private var sectionDelayTask: DispatchWorkItem?
+
+    @State private var currentSection: GSProgressSectionMetadata
+    @State private var animationTickerCancellable: Cancellable?
+    
+    @State private var currentSectionIndex: Int = 0
+    @State private var nextStopValue: CGFloat = 0.0
+    
+    @State private var progress: CGFloat = 0.0 {
+        didSet {
+            progressUpdater?(progress)
+        }
+    }
+
+    private var advancementDelta: CGFloat {
+        currentSection.sectionProportionValue/(60.0*currentSection.duration)
+    }
+    
     init(type: GSProgressBarType,
-                animationType: GSAnimationType,
-                progressUpdater: GSProgressUpdater? = nil,
-                play: Binding<Bool>) {
+         animationType: GSAnimationType,
+         progressUpdater: GSProgressUpdater? = nil,
+         play: Binding<Bool>) {
         self.type = type
         self.configuration = .init(progressAnimationConfiguration: animationType)
         self.progressUpdater = progressUpdater
         _play = play
+        _currentSection = State(initialValue:configuration.sectionsDurations[0])
+        _nextStopValue = State(initialValue:currentSection.sectionProportionValue)
     }
     
     var body: some View {
@@ -75,10 +96,59 @@ struct GSProgressBarWrapper: View {
         case .linear:
             EmptyView()
         case .circular:
-            GSCircularProgressBar(configuration: configuration, progressUpdater: progressUpdater, play: $play)
+            GSCircularProgressBar(progress: $progress)
+                .onAppear{
+                    play ? start() : pause()
+                }
+                .onChange(of: play) { newValue in
+                    newValue ? start() : pause()
+                }
+                .onReceive(animationTicker) { _ in
+                    guard progress < nextStopValue else {
+                        progress = nextStopValue
+                        sectionDelay()
+                        return
+                    }
+                    withAnimation {
+                        progress += advancementDelta
+                    }
+                }
         case .customPath:
             EmptyView()
         }
+    }
+    
+    private func updateSection() {
+        currentSectionIndex += 1
+        guard currentSectionIndex < configuration.sectionsDurations.count else { pause(); return }
+        currentSection = configuration.sectionsDurations[currentSectionIndex]
+        nextStopValue += currentSection.sectionProportionValue
+    }
+    
+    private func sectionDelay() {
+        guard currentSection.sectionDelay > 0 else { updateSection(); return }
+        pause()
+
+        sectionDelayTask = DispatchWorkItem {
+            updateSection()
+            connect()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + currentSection.sectionDelay, execute: sectionDelayTask!)
+    }
+
+    private func connect() {
+        animationTicker = .init(interval: 1/60, runLoop: .main, mode: .common)
+        animationTickerCancellable = animationTicker.connect()
+    }
+    
+    private func start() {
+        connect()
+    }
+    
+    private func pause() {
+        sectionDelayTask?.cancel()
+        animationTickerCancellable?.cancel()
     }
 }
 
