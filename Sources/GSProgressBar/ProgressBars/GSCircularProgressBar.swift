@@ -9,22 +9,21 @@ import SwiftUI
 import Combine
 
 struct GSCircularProgressBar: View {
-    @Binding private var progress: CGFloat
-
-    init(progress: Binding<CGFloat>) {
-        _progress = progress
-    }
+    @Binding var progress: CGFloat
+    let trackLineWidth: CGFloat
+    let fillLineWidth: CGFloat
     
     var body: some View {
         ZStack {
             Circle()
-                .stroke(.gray,lineWidth: 16)
+                .stroke(.gray, lineWidth: trackLineWidth)
+                .padding(trackLineWidth/2)
                 .shadow(color:.blue, radius: 5)
             Circle()
                 .trim(from: 0, to: progress)
                 .rotation(.degrees(-90))
-                .stroke(.blue, style: StrokeStyle(lineWidth: 14, lineCap: .round))
-            
+                .stroke(.blue, style: StrokeStyle(lineWidth: fillLineWidth, lineCap: .round))
+                .padding(trackLineWidth/2)
         }
     }
 }
