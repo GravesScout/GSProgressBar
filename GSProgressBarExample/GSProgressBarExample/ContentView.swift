@@ -67,10 +67,15 @@ struct CircularScreensView: View {
                 CircularScreen()
             case .sectioned:
                 ZStack {
-                    GSProgressBar(type: .circular, animationType: .sectioned(sections: [
+                    GSProgressBar(type: .circular, 
+                                  animationType: .sectioned(
+                                    sections: [
                         .init(duration: 3, sectionProportionValue: 0.3, sectionDelay: 2),
                         .init(duration: 1.5, sectionProportionValue: 0.6, sectionDelay: 4),
-                        .init(duration: 5, sectionProportionValue: 0.1)]), play: $play) { updatedProgress in
+                        .init(duration: 5, sectionProportionValue: 0.1)]), 
+                                  trackLineWidth: 16,
+                                  fillLineWidth: 14,
+                                  play: $play) { updatedProgress in
                             progress = updatedProgress
                         }
                     .frame(width: 150, height: 150)
@@ -78,7 +83,11 @@ struct CircularScreensView: View {
                 }
             case .randomizedNoDelay:
                 ZStack {
-                    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .noDelay)), play: $play){ updatedProgress in
+                    GSProgressBar(type: .circular, 
+                                  animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .noDelay)),
+                                  trackLineWidth: 16,
+                                  fillLineWidth: 14,
+                                  play: $play){ updatedProgress in
                         progress = updatedProgress
                     }
                         .frame(width: 150, height: 150)
@@ -86,7 +95,11 @@ struct CircularScreensView: View {
                 }
             case .randomizedConstantDelay:
                 ZStack {
-                    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .constantDelay(delay: 1.2))), play: $play){ updatedProgress in
+                    GSProgressBar(type: .circular, 
+                                  animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .constantDelay(delay: 1.2))),
+                                  trackLineWidth: 16,
+                                  fillLineWidth: 14,
+                                  play: $play){ updatedProgress in
                         progress = updatedProgress
                     }
                         .frame(width: 150, height: 150)
@@ -94,7 +107,11 @@ struct CircularScreensView: View {
                 }
             case .randomizedRandomDelay:
                 ZStack {
-                    GSProgressBar(type: .circular, animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .randomizedDelay(delayRange: 0.4...5))), play: $play) { updatedProgress in
+                    GSProgressBar(type: .circular, 
+                                  animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .randomizedDelay(delayRange: 0.4...5))),
+                                  trackLineWidth: 16,
+                                  fillLineWidth: 14,
+                                  play: $play) { updatedProgress in
                             progress = updatedProgress
                         }
                         .frame(width: 150, height: 150)
@@ -113,7 +130,11 @@ struct CircularScreen: View {
     }
     var body: some View {
         ZStack {
-            GSProgressBar(type: .circular, animationType: .linear(duration: 5), play: $play) { updatedProgress in
+            GSProgressBar(type: .circular,
+                          animationType: .linear(duration: 5),
+                          trackLineWidth: 16,
+                          fillLineWidth: 14,
+                          play: $play) { updatedProgress in
                 progress = updatedProgress
             }
             .frame(width: 150, height: 150)
