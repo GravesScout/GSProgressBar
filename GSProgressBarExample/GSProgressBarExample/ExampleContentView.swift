@@ -8,45 +8,6 @@
 import SwiftUI
 import GSProgressBar
 
-enum CircularScreens {
-    case manual
-    case linear
-    case sectioned
-    case randomizedNoDelay
-    case randomizedConstantDelay
-    case randomizedRandomDelay
-    
-    var animationType: GSAnimationType {
-        switch self {
-        case .manual:
-            return .linear(duration: 0)
-        case .linear:
-            return .linear(duration: 5)
-        case .sectioned:
-            return .sectioned(
-                sections: [
-                    .init(duration: 3, sectionProportionValue: 0.3, sectionDelay: 2),
-                    .init(duration: 1.5, sectionProportionValue: 0.6, sectionDelay: 4),
-                    .init(duration: 5, sectionProportionValue: 0.1)])
-        case .randomizedNoDelay:
-            return .randomized(configuration: .init(
-                sectionsRange: 5...8,
-                durationRange: 1...5,
-                sectionsDelay: .noDelay))
-        case .randomizedConstantDelay:
-                return .randomized(configuration: .init(
-                    sectionsRange: 5...8,
-                    durationRange: 1...5,
-                    sectionsDelay: .constantDelay(delay: 1.2)))
-        case .randomizedRandomDelay:
-                return .randomized(configuration: .init(
-                    sectionsRange: 5...8,
-                    durationRange: 1...5,
-                    sectionsDelay: .randomizedDelay(delayRange: 0.4...5)))
-        }
-    }
-}
-
 enum LoadersScreens {
     case circular
 }
@@ -100,66 +61,12 @@ struct CircularScreensView: View {
             case .manual:
                 ManualCircularScreen()
             default:
-                CircularScreen(animationType: screen.animationType)
+                PredefinedCircularScreen(animationType: screen.animationType)
             }
         }
     }
 }
 
-
-struct ManualCircularScreen: View {
-    @State private var progress: CGFloat = 0.0
-    
-    var body: some View {
-        VStack(spacing: 40) {
-            ZStack {
-                GSManualProgressBar(type: .circular,
-                                    trackLineWidth: 16,
-                                    fillLineWidth: 14,
-                                    progress: $progress)
-                .frame(width: 150, height: 150)
-                Text("\(progress)")
-            }
-            VStack(spacing: 10) {
-                Text("\(progress)")
-                
-                Slider(value: $progress, in: 0...1) {
-                    Text("\(progress)")
-                } minimumValueLabel: {
-                    Text("0")
-                } maximumValueLabel: {
-                    Text("1")
-                }
-            }
-
-        }
-    }
-}
-
-struct CircularScreen: View {
-    @State var progress: CGFloat = 0.0
-    @State var play: Bool = true
-    var animationType: GSAnimationType
-    
-    var body: some View {
-        VStack(spacing: 20) {
-            ZStack {
-                GSProgressBar(type: .circular,
-                              animationType: animationType,
-                              trackLineWidth: 16,
-                              fillLineWidth: 14,
-                              play: $play) { updatedProgress in
-                    progress = updatedProgress
-                }
-                              .frame(width: 150, height: 150)
-                Text("\(progress)")
-            }
-            Button(play ? "Pause" : "Play") {
-                play.toggle()
-            }
-        }
-    }
-}
 #Preview {
     ExampleContentView()
 }

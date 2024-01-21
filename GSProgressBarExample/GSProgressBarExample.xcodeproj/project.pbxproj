@@ -11,6 +11,9 @@
 		E6089E8F2B3478EA007428A0 /* ExampleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6089E8E2B3478EA007428A0 /* ExampleContentView.swift */; };
 		E6089E912B3478ED007428A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6089E902B3478ED007428A0 /* Assets.xcassets */; };
 		E6089E942B3478ED007428A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6089E932B3478ED007428A0 /* Preview Assets.xcassets */; };
+		E659D7052B5D3C280039D7E8 /* PredefinedCircularScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E659D7042B5D3C280039D7E8 /* PredefinedCircularScreen.swift */; };
+		E659D7072B5D3E110039D7E8 /* ManualCircularScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E659D7062B5D3E110039D7E8 /* ManualCircularScreen.swift */; };
+		E659D70A2B5D3ED80039D7E8 /* CircularScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E659D7092B5D3ED80039D7E8 /* CircularScreens.swift */; };
 		E68E05972B347980005F0B25 /* GSProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = E68E05962B347980005F0B25 /* GSProgressBar */; };
 /* End PBXBuildFile section */
 
@@ -20,6 +23,9 @@
 		E6089E8E2B3478EA007428A0 /* ExampleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleContentView.swift; sourceTree = "<group>"; };
 		E6089E902B3478ED007428A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6089E932B3478ED007428A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E659D7042B5D3C280039D7E8 /* PredefinedCircularScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedCircularScreen.swift; sourceTree = "<group>"; };
+		E659D7062B5D3E110039D7E8 /* ManualCircularScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCircularScreen.swift; sourceTree = "<group>"; };
+		E659D7092B5D3ED80039D7E8 /* CircularScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularScreens.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +59,7 @@
 		E6089E8B2B3478EA007428A0 /* GSProgressBarExample */ = {
 			isa = PBXGroup;
 			children = (
+				E659D7022B5D3BFE0039D7E8 /* Screens */,
 				E6089E8C2B3478EA007428A0 /* GSProgressBarExampleApp.swift */,
 				E6089E8E2B3478EA007428A0 /* ExampleContentView.swift */,
 				E6089E902B3478ED007428A0 /* Assets.xcassets */,
@@ -67,6 +74,32 @@
 				E6089E932B3478ED007428A0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E659D7022B5D3BFE0039D7E8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				E659D7082B5D3EBF0039D7E8 /* ScreenTypes */,
+				E659D7032B5D3C110039D7E8 /* CircularScreens */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		E659D7032B5D3C110039D7E8 /* CircularScreens */ = {
+			isa = PBXGroup;
+			children = (
+				E659D7042B5D3C280039D7E8 /* PredefinedCircularScreen.swift */,
+				E659D7062B5D3E110039D7E8 /* ManualCircularScreen.swift */,
+			);
+			path = CircularScreens;
+			sourceTree = "<group>";
+		};
+		E659D7082B5D3EBF0039D7E8 /* ScreenTypes */ = {
+			isa = PBXGroup;
+			children = (
+				E659D7092B5D3ED80039D7E8 /* CircularScreens.swift */,
+			);
+			path = ScreenTypes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +180,9 @@
 			files = (
 				E6089E8F2B3478EA007428A0 /* ExampleContentView.swift in Sources */,
 				E6089E8D2B3478EA007428A0 /* GSProgressBarExampleApp.swift in Sources */,
+				E659D7072B5D3E110039D7E8 /* ManualCircularScreen.swift in Sources */,
+				E659D7052B5D3C280039D7E8 /* PredefinedCircularScreen.swift in Sources */,
+				E659D70A2B5D3ED80039D7E8 /* CircularScreens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
