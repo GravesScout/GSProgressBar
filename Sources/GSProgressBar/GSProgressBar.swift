@@ -9,7 +9,14 @@ public struct GSManualProgressBar: View {
     public let type: GSProgressBarType
     public let trackLineWidth: CGFloat
     public let fillLineWidth: CGFloat
-    @Binding var progress: CGFloat
+    @Binding public var progress: CGFloat
+    
+    public init(type: GSProgressBarType, trackLineWidth: CGFloat, fillLineWidth: CGFloat, progress: Binding<CGFloat>) {
+        self.type = type
+        self.trackLineWidth = trackLineWidth
+        self.fillLineWidth = fillLineWidth
+        _progress = progress
+    }
     
     public var body: some View {
         switch type {
