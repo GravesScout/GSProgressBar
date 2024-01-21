@@ -9,7 +9,7 @@ public struct GSProgressBar: View, Equatable {
     private let progressUpdater: GSProgressUpdater?
     private let type: GSProgressBarType
     private let animationType: GSAnimationType
-    @Binding var play: Bool
+    @Binding private var play: Bool
     
     public init(type: GSProgressBarType,
                 animationType: GSAnimationType,
@@ -34,9 +34,9 @@ struct GSProgressBarWrapper: View {
     private let progressUpdater: GSProgressUpdater?
     private let type: GSProgressBarType
     private let configuration: GSProgressBarConfiguration
-    @Binding var play: Bool
+    @Binding private var play: Bool
     
-    public init(type: GSProgressBarType,
+    init(type: GSProgressBarType,
                 animationType: GSAnimationType,
                 progressUpdater: GSProgressUpdater? = nil,
                 play: Binding<Bool>) {
