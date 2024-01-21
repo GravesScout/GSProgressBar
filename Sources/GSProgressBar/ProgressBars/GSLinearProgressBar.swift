@@ -15,21 +15,25 @@ struct GSLinearProgressBar: View {
     let cornerRadius: CGFloat
     
     var body: some View {
-        GeometryReader { proxy in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .frame(height: trackLineWidth)
-                    .foregroundColor(.gray)
-                    .shadow(color:.blue, radius: 5)
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .frame(width:(maxWidth * progress), height: fillLineWidth)
-                    .foregroundColor(.blue)
-                    .padding(.horizontal, (trackLineWidth-fillLineWidth)/2)
-            }
-            .onAppear {
-                maxWidth = proxy.size.width
-            }
+        
+        ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .frame(height: trackLineWidth)
+                .foregroundColor(.gray)
+                .shadow(color:.blue, radius: 5)
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .frame(width:(maxWidth * progress), height: fillLineWidth)
+                .foregroundColor(.blue)
+                .padding(.horizontal, (trackLineWidth-fillLineWidth)/2)
         }
+        .background(
+            GeometryReader { proxy in
+                Color.clear
+                    .onAppear {
+                        maxWidth = proxy.size.width
+                    }
+            }
+        )
     }
 }
 
