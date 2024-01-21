@@ -8,19 +8,35 @@
 import SwiftUI
 import GSProgressBar
 
-struct ManualCircularScreen: View {
+struct ManualProgressScreen: View {
     @State private var progress: CGFloat = 0.0
-    
+    var progressType: GSProgressBarType
     var body: some View {
         VStack(spacing: 40) {
-            ZStack {
-                GSManualProgressBar(type: .circular,
+            switch progressType {
+            case .linear:
+                GSManualProgressBar(type: progressType,
                                     trackLineWidth: 16,
                                     fillLineWidth: 14,
                                     progress: $progress)
-                .frame(width: 150, height: 150)
-                Text("\(progress)")
+                .frame(width: 150)
+            case .circular:
+                ZStack {
+                    GSManualProgressBar(type: progressType,
+                                        trackLineWidth: 16,
+                                        fillLineWidth: 14,
+                                        progress: $progress)
+                    .frame(width: 150, height: 150)
+                    Text("\(progress)")
+                }
+            case .customPath:
+                GSManualProgressBar(type: progressType,
+                                    trackLineWidth: 16,
+                                    fillLineWidth: 14,
+                                    progress: $progress)
+                .frame(width: 150)
             }
+            
             VStack(spacing: 10) {
                 Text("\(progress)")
                 
@@ -31,11 +47,15 @@ struct ManualCircularScreen: View {
                 } maximumValueLabel: {
                     Text("1")
                 }
-            }
+            }.padding(.horizontal, 40)
         }
     }
 }
 
-#Preview {
-    ManualCircularScreen()
+#Preview("Linear Progress") {
+    ManualProgressScreen(progressType: .linear)
+}
+
+#Preview("Circular Progress") {
+    ManualProgressScreen(progressType: .circular)
 }

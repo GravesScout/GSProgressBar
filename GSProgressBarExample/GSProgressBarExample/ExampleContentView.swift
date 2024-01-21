@@ -9,6 +9,7 @@ import SwiftUI
 import GSProgressBar
 
 enum LoadersScreens {
+    case linear
     case circular
 }
 
@@ -20,11 +21,16 @@ struct ExampleContentView: View {
                 NavigationLink(value: LoadersScreens.circular) {
                     Text("Circular loader")
                 }
+                NavigationLink(value: LoadersScreens.linear) {
+                    Text("Linear loader")
+                }
             }
             .navigationDestination(for: LoadersScreens.self) { screen in
                 switch screen {
                 case .circular:
-                    CircularScreensView()
+                    ProgressScreensView(progressType: .circular)
+                case .linear:
+                    ProgressScreensView(progressType: .linear)
                 }
             }
         }
@@ -32,36 +38,35 @@ struct ExampleContentView: View {
 }
 
 
-struct CircularScreensView: View {
-    @State var progress: CGFloat = 0.0
-    @State var play: Bool = true
+struct ProgressScreensView: View {
+    var progressType: GSProgressBarType
     var body: some View {
         List {
-            NavigationLink(value: CircularScreens.manual) {
+            NavigationLink(value: ProgressScreens.manual(progressType: progressType)) {
                 Text("Manual loading")
             }
-            NavigationLink(value: CircularScreens.linear) {
+            NavigationLink(value: ProgressScreens.linear(progressType: progressType)) {
                 Text("Linear loading")
             }
-            NavigationLink(value: CircularScreens.sectioned) {
+            NavigationLink(value: ProgressScreens.sectioned(progressType: progressType)) {
                 Text("Sectioned loading")
             }
-            NavigationLink(value: CircularScreens.randomizedNoDelay) {
+            NavigationLink(value: ProgressScreens.randomizedNoDelay(progressType: progressType)) {
                 Text("Randomized no delay loading")
             }
-            NavigationLink(value: CircularScreens.randomizedConstantDelay) {
+            NavigationLink(value: ProgressScreens.randomizedConstantDelay(progressType: progressType)) {
                 Text("Randomized constant delay loading")
             }
-            NavigationLink(value: CircularScreens.randomizedRandomDelay) {
+            NavigationLink(value: ProgressScreens.randomizedRandomDelay(progressType: progressType)) {
                 Text("Randomized random delay loading")
             }
         }
-        .navigationDestination(for: CircularScreens.self) { screen in
+        .navigationDestination(for: ProgressScreens.self) { screen in
             switch screen {
             case .manual:
-                ManualCircularScreen()
+                ManualProgressScreen(progressType: screen.progressType)
             default:
-                PredefinedCircularScreen(animationType: screen.animationType)
+                PredefinedProgressScreen(animationType: screen.animationType,progressType: screen.progressType)
             }
         }
     }

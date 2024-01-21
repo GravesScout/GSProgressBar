@@ -8,15 +8,16 @@
 import SwiftUI
 import GSProgressBar
 
-struct PredefinedCircularScreen: View {
+struct PredefinedProgressScreen: View {
     @State var progress: CGFloat = 0.0
     @State var play: Bool = true
     var animationType: GSAnimationType
+    var progressType: GSProgressBarType
     
     var body: some View {
         VStack(spacing: 20) {
             ZStack {
-                GSProgressBar(type: .circular,
+                GSProgressBar(type: progressType,
                               animationType: animationType,
                               trackLineWidth: 16,
                               fillLineWidth: 14,
@@ -34,17 +35,17 @@ struct PredefinedCircularScreen: View {
 }
 
 #Preview("Linear Progress") {
-    PredefinedCircularScreen(animationType: CircularScreens.linear.animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.linear(progressType: .circular).animationType, progressType: .circular)
 }
 #Preview("Sections Progress") {
-    PredefinedCircularScreen(animationType: CircularScreens.sectioned.animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.sectioned(progressType: .circular).animationType, progressType: .circular)
 }
 #Preview("Randomized No Delay Progress") {
-    PredefinedCircularScreen(animationType: CircularScreens.randomizedNoDelay.animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.randomizedNoDelay(progressType: .circular).animationType, progressType: .circular)
 }
 #Preview("Randomized Constant Delay Progress") {
-    PredefinedCircularScreen(animationType: CircularScreens.randomizedConstantDelay.animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.randomizedConstantDelay(progressType: .circular).animationType, progressType: .circular)
 }
 #Preview("Randomized + Randomized Delay Progress") {
-    PredefinedCircularScreen(animationType: CircularScreens.randomizedRandomDelay.animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.randomizedRandomDelay(progressType: .circular).animationType, progressType: .circular)
 }

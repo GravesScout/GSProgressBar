@@ -192,6 +192,15 @@ struct GSProgressBarWrapper: View {
     }
 }
 
+#Preview("Horizontal Linear") {
+    GSProgressBar(type: .linear,
+                  animationType: .linear(duration: 5),
+                  trackLineWidth: 16,
+                  fillLineWidth: 14,
+                  play: .constant(true))
+    .frame(width: 150)
+}
+
 #Preview("Linear") {
     GSProgressBar(type: .circular,
                   animationType: .linear(duration: 5),
