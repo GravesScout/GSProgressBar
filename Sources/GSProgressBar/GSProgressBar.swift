@@ -5,7 +5,7 @@
 import SwiftUI
 import Combine
 
-public struct GSManualProgressBar: View, Equatable {
+public struct GSManualProgressBar: View {
     private let type: GSProgressBarType
     @Binding var progress: CGFloat
     
@@ -16,12 +16,15 @@ public struct GSManualProgressBar: View, Equatable {
     }
     
     public var body: some View {
-        EmptyView()
-//        GSProgressBarWrapper(type: type, animationType: animationType, progressUpdater: progressUpdater, play: $play)
-    }
-    
-    public static func == (lhs: GSManualProgressBar, rhs: GSManualProgressBar) -> Bool {
-        return true
+        switch type {
+        case .linear:
+            EmptyView()
+        case .circular:
+            GSCircularProgressBar(progress: $progress)
+                
+        case .customPath:
+            EmptyView()
+        }
     }
 }
 
