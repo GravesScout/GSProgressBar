@@ -21,7 +21,10 @@ public struct GSManualProgressBar: View {
     public var body: some View {
         switch type {
         case .linear:
-            EmptyView()
+            GSLinearProgressBar(progress: $progress,
+                                trackLineWidth: trackLineWidth,
+                                fillLineWidth: fillLineWidth,
+                                cornerRadius: 16)
         case .circular:
             GSCircularProgressBar(progress: $progress,
                                   trackLineWidth: trackLineWidth,
@@ -110,12 +113,31 @@ struct GSProgressBarWrapper: View {
     var body: some View {
         switch type {
         case .linear:
-            EmptyView()
+            GSLinearProgressBar(progress: $progress,
+                                trackLineWidth: trackLineWidth,
+                                fillLineWidth: fillLineWidth,
+                                cornerRadius: 16)
+            .onAppear {
+                play ? start() : pause()
+            }
+            .onChange(of: play) { newValue in
+                newValue ? start() : pause()
+            }
+            .onReceive(animationTicker) { _ in
+                guard progress < nextStopValue else {
+                    progress = nextStopValue
+                    sectionDelay()
+                    return
+                }
+                withAnimation {
+                    progress += advancementDelta
+                }
+            }
         case .circular:
             GSCircularProgressBar(progress: $progress,
                                   trackLineWidth: trackLineWidth,
                                   fillLineWidth: fillLineWidth)
-                .onAppear{
+                .onAppear {
                     play ? start() : pause()
                 }
                 .onChange(of: play) { newValue in
