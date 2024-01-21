@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E6089E8D2B3478EA007428A0 /* GSProgressBarExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6089E8C2B3478EA007428A0 /* GSProgressBarExampleApp.swift */; };
-		E6089E8F2B3478EA007428A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6089E8E2B3478EA007428A0 /* ContentView.swift */; };
+		E6089E8F2B3478EA007428A0 /* ExampleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6089E8E2B3478EA007428A0 /* ExampleContentView.swift */; };
 		E6089E912B3478ED007428A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6089E902B3478ED007428A0 /* Assets.xcassets */; };
 		E6089E942B3478ED007428A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6089E932B3478ED007428A0 /* Preview Assets.xcassets */; };
 		E68E05972B347980005F0B25 /* GSProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = E68E05962B347980005F0B25 /* GSProgressBar */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		E6089E892B3478EA007428A0 /* GSProgressBarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSProgressBarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6089E8C2B3478EA007428A0 /* GSProgressBarExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSProgressBarExampleApp.swift; sourceTree = "<group>"; };
-		E6089E8E2B3478EA007428A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E6089E8E2B3478EA007428A0 /* ExampleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleContentView.swift; sourceTree = "<group>"; };
 		E6089E902B3478ED007428A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6089E932B3478ED007428A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,7 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				E6089E8C2B3478EA007428A0 /* GSProgressBarExampleApp.swift */,
-				E6089E8E2B3478EA007428A0 /* ContentView.swift */,
+				E6089E8E2B3478EA007428A0 /* ExampleContentView.swift */,
 				E6089E902B3478ED007428A0 /* Assets.xcassets */,
 				E6089E922B3478ED007428A0 /* Preview Content */,
 			);
@@ -145,7 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6089E8F2B3478EA007428A0 /* ContentView.swift in Sources */,
+				E6089E8F2B3478EA007428A0 /* ExampleContentView.swift in Sources */,
 				E6089E8D2B3478EA007428A0 /* GSProgressBarExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

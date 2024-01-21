@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ExampleContentView.swift
 //  GSProgressBarExample
 //
 //  Created by Dor Ditchi on 21/12/2023.
@@ -51,7 +51,7 @@ enum LoadersScreens {
     case circular
 }
 
-struct ContentView: View {
+struct ExampleContentView: View {
     @State var path = NavigationPath()
     var body: some View {
         NavigationStack(path: $path) {
@@ -161,5 +161,5 @@ struct CircularScreen: View {
     }
 }
 #Preview {
-    ContentView()
+    ExampleContentView()
 }
