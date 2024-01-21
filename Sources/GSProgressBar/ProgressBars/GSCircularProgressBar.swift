@@ -29,5 +29,5 @@ struct GSCircularProgressBar: View {
 }
 
 #Preview {
-    SwiftUIView()
+    GSCircularProgressBar(progress: .constant(0.40), trackLineWidth: 16, fillLineWidth: 14)
 }
