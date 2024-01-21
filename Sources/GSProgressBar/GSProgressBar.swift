@@ -5,6 +5,27 @@
 import SwiftUI
 import Combine
 
+public struct GSManualProgressBar: View, Equatable {
+    private let type: GSProgressBarType
+    @Binding var progress: CGFloat
+    
+    public init(type: GSProgressBarType,
+                progress: Binding<CGFloat>) {
+        self.type = type
+        _progress = progress
+    }
+    
+    public var body: some View {
+        EmptyView()
+//        GSProgressBarWrapper(type: type, animationType: animationType, progressUpdater: progressUpdater, play: $play)
+    }
+    
+    public static func == (lhs: GSManualProgressBar, rhs: GSManualProgressBar) -> Bool {
+        return true
+    }
+}
+
+
 public struct GSProgressBar: View, Equatable {
     private let progressUpdater: GSProgressUpdater?
     private let type: GSProgressBarType
