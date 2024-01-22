@@ -14,6 +14,7 @@
 		E659D7052B5D3C280039D7E8 /* PredefinedCircularScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E659D7042B5D3C280039D7E8 /* PredefinedCircularScreen.swift */; };
 		E659D7072B5D3E110039D7E8 /* ManualCircularScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E659D7062B5D3E110039D7E8 /* ManualCircularScreen.swift */; };
 		E659D70A2B5D3ED80039D7E8 /* CircularScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E659D7092B5D3ED80039D7E8 /* CircularScreens.swift */; };
+		E659D70F2B5E6B490039D7E8 /* SwiftLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E659D70E2B5E6B490039D7E8 /* SwiftLogo.swift */; };
 		E68E05972B347980005F0B25 /* GSProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = E68E05962B347980005F0B25 /* GSProgressBar */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		E659D7042B5D3C280039D7E8 /* PredefinedCircularScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedCircularScreen.swift; sourceTree = "<group>"; };
 		E659D7062B5D3E110039D7E8 /* ManualCircularScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCircularScreen.swift; sourceTree = "<group>"; };
 		E659D7092B5D3ED80039D7E8 /* CircularScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularScreens.swift; sourceTree = "<group>"; };
+		E659D70E2B5E6B490039D7E8 /* SwiftLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				E6089E8E2B3478EA007428A0 /* ExampleContentView.swift */,
 				E6089E902B3478ED007428A0 /* Assets.xcassets */,
 				E6089E922B3478ED007428A0 /* Preview Content */,
+				E659D70E2B5E6B490039D7E8 /* SwiftLogo.swift */,
 			);
 			path = GSProgressBarExample;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				E6089E8D2B3478EA007428A0 /* GSProgressBarExampleApp.swift in Sources */,
 				E659D7072B5D3E110039D7E8 /* ManualCircularScreen.swift in Sources */,
 				E659D7052B5D3C280039D7E8 /* PredefinedCircularScreen.swift in Sources */,
+				E659D70F2B5E6B490039D7E8 /* SwiftLogo.swift in Sources */,
 				E659D70A2B5D3ED80039D7E8 /* CircularScreens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
