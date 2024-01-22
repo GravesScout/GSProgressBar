@@ -11,28 +11,35 @@ import GSProgressBar
 struct ManualProgressScreen: View {
     @State private var progress: CGFloat = 0.0
     var progressType: GSProgressBarType
+    var lineWidth: CGFloat {
+        if case .customPath(_) = progressType {
+            return 6
+        } else {
+            return 16
+        }
+    }
     var body: some View {
         VStack(spacing: 40) {
             switch progressType {
             case .linear:
                 GSManualProgressBar(type: progressType,
-                                    trackLineWidth: 16,
-                                    fillLineWidth: 14,
+                                    trackLineWidth: lineWidth,
+                                    fillLineWidth: lineWidth - 2,
                                     progress: $progress)
                 .frame(width: 150)
             case .circular:
                 ZStack {
                     GSManualProgressBar(type: progressType,
-                                        trackLineWidth: 16,
-                                        fillLineWidth: 14,
+                                        trackLineWidth: lineWidth,
+                                        fillLineWidth: lineWidth - 2,
                                         progress: $progress)
                     .frame(width: 150, height: 150)
                     Text("\(progress)")
                 }
             case .customPath:
                 GSManualProgressBar(type: progressType,
-                                    trackLineWidth: 16,
-                                    fillLineWidth: 14,
+                                    trackLineWidth: lineWidth,
+                                    fillLineWidth: lineWidth - 2,
                                     progress: $progress)
                 .frame(width: 150)
             }

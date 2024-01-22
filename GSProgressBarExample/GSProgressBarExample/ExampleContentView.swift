@@ -11,6 +11,7 @@ import GSProgressBar
 enum LoadersScreens {
     case linear
     case circular
+    case customPath
 }
 
 struct ExampleContentView: View {
@@ -24,6 +25,9 @@ struct ExampleContentView: View {
                 NavigationLink(value: LoadersScreens.linear) {
                     Text("Linear loader")
                 }
+                NavigationLink(value: LoadersScreens.customPath) {
+                    Text("Custom loader")
+                }
             }
             .navigationDestination(for: LoadersScreens.self) { screen in
                 switch screen {
@@ -31,6 +35,8 @@ struct ExampleContentView: View {
                     ProgressScreensView(progressType: .circular)
                 case .linear:
                     ProgressScreensView(progressType: .linear)
+                case .customPath:
+                    ProgressScreensView(progressType: .customPath(path: .swiftLogo))
                 }
             }
         }

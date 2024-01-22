@@ -13,14 +13,20 @@ struct PredefinedProgressScreen: View {
     @State var play: Bool = true
     var animationType: GSAnimationType
     var progressType: GSProgressBarType
-    
+    var lineWidth: CGFloat {
+        if case .customPath(_) = progressType {
+            return 6
+        } else {
+            return 16
+        }
+    }
     var body: some View {
         VStack(spacing: 20) {
             ZStack {
                 GSProgressBar(type: progressType,
                               animationType: animationType,
-                              trackLineWidth: 16,
-                              fillLineWidth: 14,
+                              trackLineWidth: lineWidth,
+                              fillLineWidth: lineWidth - 2,
                               play: $play) { updatedProgress in
                     progress = updatedProgress
                 }
