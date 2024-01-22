@@ -29,8 +29,11 @@ public struct GSManualProgressBar: View {
             GSCircularProgressBar(progress: $progress,
                                   trackLineWidth: trackLineWidth,
                                   fillLineWidth: fillLineWidth)
-        case .customPath:
-            EmptyView()
+        case .customPath(let path):
+            GSCustomProgressBar(path:path,
+                                progress: $progress,
+                                trackLineWidth: trackLineWidth,
+                                fillLineWidth: fillLineWidth)
         }
     }
 }
@@ -153,8 +156,27 @@ struct GSProgressBarWrapper: View {
                         progress += advancementDelta
                     }
                 }
-        case .customPath:
-            EmptyView()
+        case .customPath(let path):
+            GSCustomProgressBar(path:path,
+                                progress: $progress,
+                                trackLineWidth: trackLineWidth,
+                                fillLineWidth: fillLineWidth)
+                .onAppear {
+                    play ? start() : pause()
+                }
+                .onChange(of: play) { newValue in
+                    newValue ? start() : pause()
+                }
+                .onReceive(animationTicker) { _ in
+                    guard progress < nextStopValue else {
+                        progress = nextStopValue
+                        sectionDelay()
+                        return
+                    }
+                    withAnimation {
+                        progress += advancementDelta
+                    }
+                }
         }
     }
     
