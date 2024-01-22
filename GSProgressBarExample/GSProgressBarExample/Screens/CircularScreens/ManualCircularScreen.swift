@@ -66,3 +66,7 @@ struct ManualProgressScreen: View {
 #Preview("Circular Progress") {
     ManualProgressScreen(progressType: .circular)
 }
+
+#Preview("Custom Progress") {
+    ManualProgressScreen(progressType: .customPath(path: .swiftLogo))
+}
