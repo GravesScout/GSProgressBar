@@ -73,7 +73,7 @@ public struct GSProgressBar: View, Equatable {
 struct GSProgressBarWrapper: View {
     private let progressUpdater: GSProgressUpdater?
     private let type: GSProgressBarType
-    private let configuration: GSProgressBarConfiguration
+    @State private var configuration: GSProgressBarConfiguration
     private let trackLineWidth: CGFloat
     private let fillLineWidth: CGFloat
     @Binding private var play: Bool
@@ -104,11 +104,12 @@ struct GSProgressBarWrapper: View {
          trackLineWidth: CGFloat,
          fillLineWidth: CGFloat) {
         self.type = type
-        self.configuration = .init(progressAnimationConfiguration: animationType)
         self.progressUpdater = progressUpdater
         self.trackLineWidth = trackLineWidth
         self.fillLineWidth = fillLineWidth
         _play = play
+        let configuration: GSProgressBarConfiguration = .init(progressAnimationConfiguration: animationType)
+        _configuration = State(initialValue:configuration)
         _currentSection = State(initialValue:configuration.sectionsDurations[0])
         _nextStopValue = State(initialValue:currentSection.sectionProportionValue)
     }
