@@ -29,8 +29,7 @@ struct PredefinedProgressScreen: View {
                               fillLineWidth: lineWidth - 2,
                               play: $play) { updatedProgress in
                     progress = updatedProgress
-                }
-                              .frame(width: 150, height: 150)
+                }.frame(width: 150, height: 150)
                 Text("\(progress)")
             }
             Button(play ? "Pause" : "Play") {
