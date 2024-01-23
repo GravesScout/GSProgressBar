@@ -29,9 +29,6 @@ GSProgressBar(type: progressType,
                 }.frame(width: 150, height: 150)
 ```
 
-<br>
-<br>
-
 ### This is how to use a manual `GSProgressBar`
 
 `animationType` - value from `GSAnimationType` enum.<br>
@@ -82,7 +79,7 @@ GSProgressBar(type: progressType,
 `sectionsDelay` - `GSRandomizedDelay` to configure the delay between sections.
 ```
 ## Examples
-
+### <ins>A linear duration bar type progress bar:</ins>
 ```swift
 GSProgressBar(type: .bar,
               animationType: .linear(duration: 4.25),
@@ -91,7 +88,7 @@ GSProgressBar(type: .bar,
               play: $play)
 ```
 
-
+### <ins>A sectioned circular type progress bar:</ins>
 ```swift
 GSProgressBar(type: .circular,
               animationType: .sectioned(
@@ -104,6 +101,7 @@ GSProgressBar(type: .circular,
               play: $play)
 ```
 
+### <ins>A randomized customPath type progress bar:</ins>
 ```swift
 GSProgressBar(type: .customPath(path: .swiftLogo),
               animationType: .randomized(
