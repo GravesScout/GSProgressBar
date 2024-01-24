@@ -20,7 +20,7 @@ public struct GSManualProgressBar: View {
     
     public var body: some View {
         switch type {
-        case .linear:
+        case .bar:
             GSLinearProgressBar(progress: $progress,
                                 trackLineWidth: trackLineWidth,
                                 fillLineWidth: fillLineWidth,
@@ -116,7 +116,7 @@ struct GSProgressBarWrapper: View {
     
     var body: some View {
         switch type {
-        case .linear:
+        case .bar:
             GSLinearProgressBar(progress: $progress,
                                 trackLineWidth: trackLineWidth,
                                 fillLineWidth: fillLineWidth,
@@ -216,7 +216,7 @@ struct GSProgressBarWrapper: View {
 }
 
 #Preview("Horizontal Linear") {
-    GSProgressBar(type: .linear,
+    GSProgressBar(type: .bar,
                   animationType: .linear(duration: 5),
                   trackLineWidth: 16,
                   fillLineWidth: 14,

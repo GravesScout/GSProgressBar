@@ -21,7 +21,7 @@ struct ManualProgressScreen: View {
     var body: some View {
         VStack(spacing: 40) {
             switch progressType {
-            case .linear:
+            case .bar:
                 GSManualProgressBar(type: progressType,
                                     trackLineWidth: lineWidth,
                                     fillLineWidth: lineWidth - 2,
@@ -60,7 +60,7 @@ struct ManualProgressScreen: View {
 }
 
 #Preview("Linear Progress") {
-    ManualProgressScreen(progressType: .linear)
+    ManualProgressScreen(progressType: .bar)
 }
 
 #Preview("Circular Progress") {

@@ -15,7 +15,7 @@ extension Path: Hashable {
 }
 
 public enum GSProgressBarType: Hashable {
-    case linear
+    case bar
     case circular
     case customPath(path: Path)
 }
