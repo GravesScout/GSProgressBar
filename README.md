@@ -113,3 +113,15 @@ GSProgressBar(type: .customPath(path: .swiftLogo),
               fillLineWidth: fillLineWidth,
               play: $play)
 ```
+## Installation
+
+Install my-project with npm
+
+```swiftPackage
+  dependencies: [
+    .package(url: "https://github.com/GravesScout/GSProgressBar", from: "main")
+]
+```
+    
+## Requirements
+* iOS 14+
