@@ -13,7 +13,7 @@ struct GSProgressBarConfiguration {
     init(progressAnimationConfiguration: GSAnimationType) {
         switch progressAnimationConfiguration {
         case .linear(let duration):
-            sectionsDurations = [.init(duration: duration, sectionProportionValue: 1.0)]
+            sectionsDurations = [.init(sectionProportionValue: duration, duration: 1.0)]
         case .sectioned(let sections):
             sectionsDurations = sections
         case .randomized(let configuration):
@@ -30,11 +30,11 @@ struct GSProgressBarConfiguration {
             let duration = Double.random(in: configuration.durationRange)
             switch configuration.sectionsDelay {
             case .noDelay:
-                randomizedResult.append(.init(duration: duration, sectionProportionValue: CGFloat(randomSections[section])))
+                randomizedResult.append(.init(sectionProportionValue: duration, duration: CGFloat(randomSections[section])))
             case .constantDelay(let delay):
-                randomizedResult.append(.init(duration: duration, sectionProportionValue: CGFloat(randomSections[section]), sectionDelay: delay))
+                randomizedResult.append(.init(sectionProportionValue: duration, duration: CGFloat(randomSections[section]), sectionDelay: delay))
             case .randomizedDelay(let delayRange):
-                randomizedResult.append(.init(duration: duration, sectionProportionValue: CGFloat(randomSections[section]), sectionDelay: CGFloat.random(in: delayRange)))
+                randomizedResult.append(.init(sectionProportionValue: duration, duration: CGFloat(randomSections[section]), sectionDelay: CGFloat.random(in: delayRange)))
             }
         }
         return  randomizedResult

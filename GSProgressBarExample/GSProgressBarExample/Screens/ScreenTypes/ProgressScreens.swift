@@ -25,9 +25,9 @@ enum ProgressScreens: Hashable {
         case .sectioned:
             return .sectioned(
                 sections: [
-                    .init(duration: 3, sectionProportionValue: 0.3, sectionDelay: 2),
-                    .init(duration: 1.5, sectionProportionValue: 0.6, sectionDelay: 4),
-                    .init(duration: 5, sectionProportionValue: 0.1)])
+                    .init(sectionProportionValue: 3, duration: 0.3, sectionDelay: 2),
+                    .init(sectionProportionValue: 1.5, duration: 0.6, sectionDelay: 4),
+                    .init(sectionProportionValue: 5, duration: 0.1)])
         case .randomizedNoDelay:
             return .randomized(configuration: .init(
                 sectionsRange: 5...8,
