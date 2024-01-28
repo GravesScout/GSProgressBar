@@ -9,12 +9,12 @@ import Foundation
 import GSProgressBar
 
 enum ProgressScreens: Hashable {
-    case manual(progressType: GSProgressBarType)
-    case linear(progressType: GSProgressBarType)
-    case sectioned(progressType: GSProgressBarType)
-    case randomizedNoDelay(progressType: GSProgressBarType)
-    case randomizedConstantDelay(progressType: GSProgressBarType)
-    case randomizedRandomDelay(progressType: GSProgressBarType)
+    case manual
+    case linear
+    case sectioned
+    case randomizedNoDelay
+    case randomizedConstantDelay
+    case randomizedRandomDelay
     
     var animationType: GSAnimationType {
         switch self {
@@ -43,23 +43,6 @@ enum ProgressScreens: Hashable {
                     sectionsRange: 5...8,
                     durationRange: 1...5,
                     sectionsDelay: .randomizedDelay(delayRange: 0.4...5)))
-        }
-    }
-    
-    var progressType: GSProgressBarType {
-        switch self {
-        case .manual(let progressType):
-            return progressType
-        case .linear(let progressType):
-            return progressType
-        case .sectioned(let progressType):
-            return progressType
-        case .randomizedNoDelay(let progressType):
-            return progressType
-        case .randomizedConstantDelay(let progressType):
-            return progressType
-        case .randomizedRandomDelay(let progressType):
-            return progressType
         }
     }
 }

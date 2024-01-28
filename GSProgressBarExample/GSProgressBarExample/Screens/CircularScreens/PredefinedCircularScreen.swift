@@ -63,17 +63,17 @@ struct PredefinedProgressScreen: View {
 }
 
 #Preview("Linear Progress") {
-    PredefinedProgressScreen(animationType: ProgressScreens.linear(progressType: .circular).animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.linear.animationType)
 }
 #Preview("Sections Progress") {
-    PredefinedProgressScreen(animationType: ProgressScreens.sectioned(progressType: .circular).animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.sectioned.animationType)
 }
 #Preview("Randomized No Delay Progress") {
-    PredefinedProgressScreen(animationType: ProgressScreens.randomizedNoDelay(progressType: .circular).animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.randomizedNoDelay.animationType)
 }
 #Preview("Randomized Constant Delay Progress") {
-    PredefinedProgressScreen(animationType: ProgressScreens.randomizedConstantDelay(progressType: .circular).animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.randomizedConstantDelay.animationType)
 }
 #Preview("Randomized + Randomized Delay Progress") {
-    PredefinedProgressScreen(animationType: ProgressScreens.randomizedRandomDelay(progressType: .circular).animationType)
+    PredefinedProgressScreen(animationType: ProgressScreens.randomizedRandomDelay.animationType)
 }
