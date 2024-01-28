@@ -12,16 +12,20 @@ struct GSCustomProgressBar: View {
     @Binding var progress: CGFloat
     let trackLineWidth: CGFloat
     let fillLineWidth: CGFloat
+    var trackColor: Color
+    var progressColor: Color
+    var shadowColor: Color
+    let showShadow: Bool
     
     var body: some View {
         ZStack {
             ScaledPath(path: path)
-                .stroke(.gray, lineWidth: trackLineWidth)
+                .stroke(trackColor, lineWidth: trackLineWidth)
                 .padding(trackLineWidth/2)
-                .shadow(color:.blue, radius: 5)
+                .shadow(color:showShadow ? shadowColor : .clear, radius: showShadow ? 5 : 0)
             ScaledPath(path: path)
                 .trim(from: 0, to: progress)
-                .stroke(.blue, style: StrokeStyle(lineWidth: fillLineWidth, lineCap: .round))
+                .stroke(progressColor, style: StrokeStyle(lineWidth: fillLineWidth, lineCap: .round))
                 .padding(trackLineWidth/2)
         }
     }
@@ -29,7 +33,7 @@ struct GSCustomProgressBar: View {
 
 
 #Preview {
-    GSCustomProgressBar(path: Path(), progress: .constant(0.4), trackLineWidth: 6, fillLineWidth: 4)
+    GSCustomProgressBar(path: Path(), progress: .constant(0.4), trackLineWidth: 6, fillLineWidth: 4, trackColor: .gray, progressColor: .blue, shadowColor: .blue, showShadow: true)
 }
 
 

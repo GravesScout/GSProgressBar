@@ -13,17 +13,20 @@ struct GSLinearProgressBar: View {
     let trackLineWidth: CGFloat
     let fillLineWidth: CGFloat
     let cornerRadius: CGFloat
+    var trackColor: Color 
+    var progressColor: Color 
+    var shadowColor: Color 
+    let showShadow: Bool
     
     var body: some View {
-        
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .frame(height: trackLineWidth)
-                .foregroundColor(.gray)
-                .shadow(color:.blue, radius: 5)
+                .foregroundColor(trackColor)
+                .shadow(color:showShadow ? shadowColor : .clear, radius: showShadow ? 5 : 0)
             RoundedRectangle(cornerRadius: cornerRadius)
                 .frame(width:(maxWidth * progress), height: fillLineWidth)
-                .foregroundColor(.blue)
+                .foregroundColor(progressColor)
                 .padding(.horizontal, (trackLineWidth-fillLineWidth)/2)
         }
         .background(
@@ -38,6 +41,6 @@ struct GSLinearProgressBar: View {
 }
 
 #Preview {
-    GSLinearProgressBar(progress: .constant(0.4), trackLineWidth: 16, fillLineWidth: 14, cornerRadius: 16)
+    GSLinearProgressBar(progress: .constant(0.4), trackLineWidth: 16, fillLineWidth: 14, cornerRadius: 16, trackColor: .gray, progressColor: .blue, shadowColor: .blue, showShadow: true)
         .frame(width: 200)
 }

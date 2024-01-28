@@ -21,7 +21,7 @@ struct ManualProgressScreen: View {
                 GSManualProgressBar(type: .bar,
                                     trackLineWidth: lineWidth,
                                     fillLineWidth: lineWidth - 2,
-                                    progress: $barProgress)
+                                    progress: $barProgress, showShadow: true)
                 .frame(width: 150)
                 
                     Text("\(barProgress)")
@@ -40,7 +40,7 @@ struct ManualProgressScreen: View {
                     GSManualProgressBar(type: .circular,
                                         trackLineWidth: lineWidth,
                                         fillLineWidth: lineWidth - 2,
-                                        progress: $circularProgress)
+                                        progress: $circularProgress, showShadow: true)
                     Text("\(circularProgress)")
                 }.frame(width: 120, height: 120)
                     
@@ -57,7 +57,7 @@ struct ManualProgressScreen: View {
                 GSManualProgressBar(type: .customPath(path: .swiftLogo),
                                     trackLineWidth: customLineWidth,
                                     fillLineWidth: customLineWidth - 2,
-                                    progress: $customProgress)
+                                    progress: $customProgress, showShadow: true)
                 .frame(width: 120, height: 120)
                 
                     Text("\(customProgress)")

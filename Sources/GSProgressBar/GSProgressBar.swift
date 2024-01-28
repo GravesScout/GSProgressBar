@@ -10,11 +10,28 @@ public struct GSManualProgressBar: View {
     public let trackLineWidth: CGFloat
     public let fillLineWidth: CGFloat
     @Binding public var progress: CGFloat
+    var trackColor: Color
+    var progressColor: Color
+    var shadowColor: Color
+    let showShadow: Bool
     
-    public init(type: GSProgressBarType, trackLineWidth: CGFloat, fillLineWidth: CGFloat, progress: Binding<CGFloat>) {
+    
+    public init(type: GSProgressBarType, 
+                trackLineWidth: CGFloat,
+                fillLineWidth: CGFloat,
+                progress: Binding<CGFloat>,
+                trackColor: Color = .gray,
+                progressColor: Color = .blue,
+                shadowColor: Color = .blue,
+                showShadow: Bool
+    ) {
         self.type = type
         self.trackLineWidth = trackLineWidth
         self.fillLineWidth = fillLineWidth
+        self.trackColor = trackColor
+        self.progressColor = progressColor
+        self.shadowColor = shadowColor
+        self.showShadow = showShadow
         _progress = progress
     }
     
@@ -24,16 +41,28 @@ public struct GSManualProgressBar: View {
             GSLinearProgressBar(progress: $progress,
                                 trackLineWidth: trackLineWidth,
                                 fillLineWidth: fillLineWidth,
-                                cornerRadius: 16)
+                                cornerRadius: 16,
+                                trackColor: trackColor,
+                                progressColor: progressColor,
+                                shadowColor: shadowColor,
+                                showShadow: showShadow)
         case .circular:
             GSCircularProgressBar(progress: $progress,
                                   trackLineWidth: trackLineWidth,
-                                  fillLineWidth: fillLineWidth)
+                                  fillLineWidth: fillLineWidth,
+                                  trackColor: trackColor,
+                                  progressColor: progressColor,
+                                  shadowColor: shadowColor,
+                                  showShadow: showShadow)
         case .customPath(let path):
             GSCustomProgressBar(path:path,
                                 progress: $progress,
                                 trackLineWidth: trackLineWidth,
-                                fillLineWidth: fillLineWidth)
+                                fillLineWidth: fillLineWidth,
+                                trackColor: trackColor,
+                                progressColor: progressColor,
+                                shadowColor: shadowColor,
+                                showShadow: showShadow)
         }
     }
 }
@@ -45,14 +74,31 @@ public struct GSProgressBar: View, Equatable {
     public let trackLineWidth: CGFloat
     public let fillLineWidth: CGFloat
     @Binding public var play: Bool
+    var trackColor: Color
+    var progressColor: Color
+    var shadowColor: Color
+    let showShadow: Bool
     public var progressUpdater: GSProgressUpdater? = .none
     
-    public init(type: GSProgressBarType, animationType: GSAnimationType, trackLineWidth: CGFloat, fillLineWidth: CGFloat, play: Binding<Bool>, progressUpdater: GSProgressUpdater? = nil) {
+    public init(type: GSProgressBarType, 
+                animationType: GSAnimationType,
+                trackLineWidth: CGFloat,
+                fillLineWidth: CGFloat,
+                play: Binding<Bool>,
+                trackColor: Color = .gray,
+                progressColor: Color = .blue,
+                shadowColor: Color = .blue,
+                showShadow: Bool,
+                progressUpdater: GSProgressUpdater? = nil) {
         self.type = type
         self.animationType = animationType
         self.trackLineWidth = trackLineWidth
         self.fillLineWidth = fillLineWidth
         self.progressUpdater = progressUpdater
+        self.trackColor = trackColor
+        self.progressColor = progressColor
+        self.shadowColor = shadowColor
+        self.showShadow = showShadow
         _play = play
     }
     
@@ -62,7 +108,11 @@ public struct GSProgressBar: View, Equatable {
                              progressUpdater: progressUpdater,
                              play: $play, 
                              trackLineWidth: trackLineWidth,
-                             fillLineWidth: fillLineWidth)
+                             fillLineWidth: fillLineWidth,
+                             trackColor: trackColor,
+                             progressColor: progressColor,
+                             shadowColor: shadowColor,
+                             showShadow: showShadow)
     }
     
     public static func == (lhs: GSProgressBar, rhs: GSProgressBar) -> Bool {
@@ -93,6 +143,11 @@ struct GSProgressBarWrapper: View {
         }
     }
 
+    var trackColor: Color
+    var progressColor: Color
+    var shadowColor: Color
+    let showShadow: Bool
+    
     private var advancementDelta: CGFloat {
         currentSection.sectionProportionValue/(60.0*currentSection.duration)
     }
@@ -102,11 +157,20 @@ struct GSProgressBarWrapper: View {
          progressUpdater: GSProgressUpdater? = nil,
          play: Binding<Bool>,
          trackLineWidth: CGFloat,
-         fillLineWidth: CGFloat) {
+         fillLineWidth: CGFloat,
+         trackColor: Color,
+         progressColor: Color,
+         shadowColor: Color,
+         showShadow: Bool) {
         self.type = type
         self.progressUpdater = progressUpdater
         self.trackLineWidth = trackLineWidth
         self.fillLineWidth = fillLineWidth
+        self.trackColor = trackColor
+        self.progressColor = progressColor
+        self.shadowColor = shadowColor
+        self.showShadow = showShadow
+        
         _play = play
         let configuration: GSProgressBarConfiguration = .init(progressAnimationConfiguration: animationType)
         _configuration = State(initialValue:configuration)
@@ -120,7 +184,11 @@ struct GSProgressBarWrapper: View {
             GSLinearProgressBar(progress: $progress,
                                 trackLineWidth: trackLineWidth,
                                 fillLineWidth: fillLineWidth,
-                                cornerRadius: 16)
+                                cornerRadius: 16,
+                                trackColor: trackColor,
+                                progressColor: progressColor,
+                                shadowColor: shadowColor,
+                                showShadow: showShadow)
             .onAppear {
                 play ? start() : pause()
             }
@@ -140,7 +208,11 @@ struct GSProgressBarWrapper: View {
         case .circular:
             GSCircularProgressBar(progress: $progress,
                                   trackLineWidth: trackLineWidth,
-                                  fillLineWidth: fillLineWidth)
+                                  fillLineWidth: fillLineWidth,
+                                  trackColor: trackColor,
+                                  progressColor: progressColor,
+                                  shadowColor: shadowColor,
+                                  showShadow: showShadow)
                 .onAppear {
                     play ? start() : pause()
                 }
@@ -161,7 +233,11 @@ struct GSProgressBarWrapper: View {
             GSCustomProgressBar(path:path,
                                 progress: $progress,
                                 trackLineWidth: trackLineWidth,
-                                fillLineWidth: fillLineWidth)
+                                fillLineWidth: fillLineWidth,
+                                trackColor: trackColor,
+                                progressColor: progressColor,
+                                shadowColor: shadowColor,
+                                showShadow: showShadow)
                 .onAppear {
                     play ? start() : pause()
                 }
@@ -220,7 +296,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .linear(duration: 5),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
-                  play: .constant(true))
+                  play: .constant(true),
+                  trackColor: .gray,
+                  progressColor: .blue,
+                  shadowColor: .blue,
+                  showShadow: true)
     .frame(width: 150)
 }
 
@@ -229,7 +309,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .linear(duration: 5),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
-                  play: .constant(true))
+                  play: .constant(true),
+                  trackColor: .gray,
+                  progressColor: .blue,
+                  shadowColor: .blue,
+                  showShadow: true)
     .frame(width: 150, height: 150)
 }
 #Preview("Sectioned") {
@@ -242,7 +326,11 @@ struct GSProgressBarWrapper: View {
                 .init(sectionProportionValue: 5, duration: 0.1)]),
         trackLineWidth: 16,
         fillLineWidth: 14,
-        play: .constant(true))
+        play: .constant(true),
+        trackColor: .gray,
+        progressColor: .blue,
+        shadowColor: .blue,
+        showShadow: true)
     .frame(width: 150, height: 150)
 }
 #Preview("Randomized no delay") {
@@ -250,7 +338,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .randomized(configuration: .init(sectionsRange: 2...2, durationRange: 1...5, sectionsDelay: .noDelay)),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
-                  play: .constant(true))
+                  play: .constant(true),
+                  trackColor: .gray,
+                  progressColor: .blue,
+                  shadowColor: .blue,
+                  showShadow: true)
     .frame(width: 150, height: 150)
 }
 #Preview("Randomized constant delay") {
@@ -258,7 +350,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .constantDelay(delay: 1.2))),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
-                  play: .constant(true))
+                  play: .constant(true),
+                  trackColor: .gray,
+                  progressColor: .blue,
+                  shadowColor: .blue,
+                  showShadow: true)
     .frame(width: 150, height: 150)
     
 }
@@ -267,7 +363,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .randomizedDelay(delayRange: 0.4...5))),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
-                  play: .constant(true))
+                  play: .constant(true),
+                  trackColor: .gray,
+                  progressColor: .blue,
+                  shadowColor: .blue,
+                  showShadow: true)
     
     .frame(width: 150, height: 150)
 }
