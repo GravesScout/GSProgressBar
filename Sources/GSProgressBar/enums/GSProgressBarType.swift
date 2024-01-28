@@ -8,13 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension Path: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.hashValue)
-    }
-}
-
-public enum GSProgressBarType: Hashable {
+public enum GSProgressBarType {
     case bar
     case circular
     case customPath(path: Path)
