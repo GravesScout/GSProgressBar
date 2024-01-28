@@ -26,8 +26,8 @@ struct PredefinedProgressScreen: View {
                               animationType: animationType,
                               trackLineWidth: lineWidth,
                               fillLineWidth: lineWidth - 2,
-                              play: $play,
-                              showShadow: true) { updatedProgress in
+                              showShadow: true, 
+                              play: $play) { updatedProgress in
                     barProgress = updatedProgress
                 }.frame(width: 150)
             })
@@ -37,8 +37,8 @@ struct PredefinedProgressScreen: View {
                               animationType: animationType,
                               trackLineWidth: lineWidth,
                               fillLineWidth: lineWidth - 2,
-                              play: $play,
-                              showShadow: true) { updatedProgress in
+                              showShadow: true, 
+                              play: $play) { updatedProgress in
                     circularProgress = updatedProgress
                 }.frame(width: 150, height: 150)
                 Text("\(circularProgress)")
@@ -50,8 +50,8 @@ struct PredefinedProgressScreen: View {
                               animationType: animationType,
                               trackLineWidth: customLineWidth,
                               fillLineWidth: customLineWidth - 2,
-                              play: $play,
-                              showShadow: true) { updatedProgress in
+                              showShadow: true, 
+                              play: $play) { updatedProgress in
                     customProgress = updatedProgress
                 }.frame(width: 150, height: 150)
             })

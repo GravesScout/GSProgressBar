@@ -19,11 +19,11 @@ public struct GSManualProgressBar: View {
     public init(type: GSProgressBarType, 
                 trackLineWidth: CGFloat,
                 fillLineWidth: CGFloat,
+                showShadow: Bool,
                 progress: Binding<CGFloat>,
                 trackColor: Color = .gray,
                 progressColor: Color = .blue,
-                shadowColor: Color = .blue,
-                showShadow: Bool
+                shadowColor: Color = .blue
     ) {
         self.type = type
         self.trackLineWidth = trackLineWidth
@@ -84,11 +84,11 @@ public struct GSProgressBar: View, Equatable {
                 animationType: GSAnimationType,
                 trackLineWidth: CGFloat,
                 fillLineWidth: CGFloat,
+                showShadow: Bool,
                 play: Binding<Bool>,
                 trackColor: Color = .gray,
                 progressColor: Color = .blue,
                 shadowColor: Color = .blue,
-                showShadow: Bool,
                 progressUpdater: GSProgressUpdater? = nil) {
         self.type = type
         self.animationType = animationType
@@ -296,11 +296,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .linear(duration: 5),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
+                  showShadow: true, 
                   play: .constant(true),
                   trackColor: .gray,
                   progressColor: .blue,
-                  shadowColor: .blue,
-                  showShadow: true)
+                  shadowColor: .blue)
     .frame(width: 150)
 }
 
@@ -309,11 +309,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .linear(duration: 5),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
+                  showShadow: true, 
                   play: .constant(true),
                   trackColor: .gray,
                   progressColor: .blue,
-                  shadowColor: .blue,
-                  showShadow: true)
+                  shadowColor: .blue)
     .frame(width: 150, height: 150)
 }
 #Preview("Sectioned") {
@@ -326,11 +326,11 @@ struct GSProgressBarWrapper: View {
                 .init(sectionProportionValue: 5, duration: 0.1)]),
         trackLineWidth: 16,
         fillLineWidth: 14,
+        showShadow: true,
         play: .constant(true),
         trackColor: .gray,
         progressColor: .blue,
-        shadowColor: .blue,
-        showShadow: true)
+        shadowColor: .blue)
     .frame(width: 150, height: 150)
 }
 #Preview("Randomized no delay") {
@@ -338,11 +338,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .randomized(configuration: .init(sectionsRange: 2...2, durationRange: 1...5, sectionsDelay: .noDelay)),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
+                  showShadow: true, 
                   play: .constant(true),
                   trackColor: .gray,
                   progressColor: .blue,
-                  shadowColor: .blue,
-                  showShadow: true)
+                  shadowColor: .blue)
     .frame(width: 150, height: 150)
 }
 #Preview("Randomized constant delay") {
@@ -350,11 +350,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .constantDelay(delay: 1.2))),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
+                  showShadow: true, 
                   play: .constant(true),
                   trackColor: .gray,
                   progressColor: .blue,
-                  shadowColor: .blue,
-                  showShadow: true)
+                  shadowColor: .blue)
     .frame(width: 150, height: 150)
     
 }
@@ -363,11 +363,11 @@ struct GSProgressBarWrapper: View {
                   animationType: .randomized(configuration: .init(sectionsRange: 5...8, durationRange: 1...5, sectionsDelay: .randomizedDelay(delayRange: 0.4...5))),
                   trackLineWidth: 16,
                   fillLineWidth: 14,
+                  showShadow: true, 
                   play: .constant(true),
                   trackColor: .gray,
                   progressColor: .blue,
-                  shadowColor: .blue,
-                  showShadow: true)
+                  shadowColor: .blue)
     
     .frame(width: 150, height: 150)
 }
