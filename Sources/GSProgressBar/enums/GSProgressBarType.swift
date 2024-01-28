@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// The possible shapes of the progress bar.
 public enum GSProgressBarType {
     case bar
     case circular

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The progress bar progress options..
 public enum GSAnimationType {
     case linear(duration: CGFloat)
     case sectioned(sections: [GSProgressSectionMetadata])

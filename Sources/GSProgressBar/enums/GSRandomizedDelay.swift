@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Constants that specify the possible delay modes for a randomized section.
 public enum GSRandomizedDelay {
     case noDelay
     case constantDelay(delay: CGFloat)
