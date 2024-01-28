@@ -9,64 +9,73 @@ import SwiftUI
 import GSProgressBar
 
 struct ManualProgressScreen: View {
-    @State private var progress: CGFloat = 0.0
-    var progressType: GSProgressBarType
-    var lineWidth: CGFloat {
-        if case .customPath(_) = progressType {
-            return 6
-        } else {
-            return 16
-        }
-    }
+    @State private var barProgress: CGFloat = 0.0
+    @State private var circularProgress: CGFloat = 0.0
+    @State private var customProgress: CGFloat = 0.0
+    
+    private let lineWidth: CGFloat = 16.0
+    private let customLineWidth: CGFloat = 6.0
     var body: some View {
-        VStack(spacing: 40) {
-            switch progressType {
-            case .bar:
-                GSManualProgressBar(type: progressType,
+        VStack(spacing: 30) {
+            VStack(spacing: 10, content: {
+                GSManualProgressBar(type: .bar,
                                     trackLineWidth: lineWidth,
                                     fillLineWidth: lineWidth - 2,
-                                    progress: $progress)
+                                    progress: $barProgress)
                 .frame(width: 150)
-            case .circular:
+                
+                    Text("\(barProgress)")
+                    
+                    Slider(value: $barProgress, in: 0...1) {
+                        EmptyView()
+                    } minimumValueLabel: {
+                        Text("0")
+                    } maximumValueLabel: {
+                        Text("1")
+                    }.padding(.horizontal, 40)
+            })
+            
+            VStack(spacing: 10, content: {
                 ZStack {
-                    GSManualProgressBar(type: progressType,
+                    GSManualProgressBar(type: .circular,
                                         trackLineWidth: lineWidth,
                                         fillLineWidth: lineWidth - 2,
-                                        progress: $progress)
-                    .frame(width: 150, height: 150)
-                    Text("\(progress)")
-                }
-            case .customPath:
-                GSManualProgressBar(type: progressType,
-                                    trackLineWidth: lineWidth,
-                                    fillLineWidth: lineWidth - 2,
-                                    progress: $progress)
-                .frame(width: 150)
-            }
-            
-            VStack(spacing: 10) {
-                Text("\(progress)")
+                                        progress: $circularProgress)
+                    Text("\(circularProgress)")
+                }.frame(width: 120, height: 120)
+                    
+                    Slider(value: $circularProgress, in: 0...1) {
+                        EmptyView()
+                    } minimumValueLabel: {
+                        Text("0")
+                    } maximumValueLabel: {
+                        Text("1")
+                    }.padding(.horizontal, 40)
+            })
                 
-                Slider(value: $progress, in: 0...1) {
-                    EmptyView()
-                } minimumValueLabel: {
-                    Text("0")
-                } maximumValueLabel: {
-                    Text("1")
-                }
-            }.padding(.horizontal, 40)
+            VStack(spacing: 10, content: {
+                GSManualProgressBar(type: .customPath(path: .swiftLogo),
+                                    trackLineWidth: customLineWidth,
+                                    fillLineWidth: customLineWidth - 2,
+                                    progress: $customProgress)
+                .frame(width: 120, height: 120)
+                
+                    Text("\(customProgress)")
+                    
+                    Slider(value: $customProgress, in: 0...1) {
+                        EmptyView()
+                    } minimumValueLabel: {
+                        Text("0")
+                    } maximumValueLabel: {
+                        Text("1")
+                    }.padding(.horizontal, 40)
+            })
+               
         }
     }
 }
 
-#Preview("Linear Progress") {
-    ManualProgressScreen(progressType: .bar)
+#Preview("Manual Progress") {
+    ManualProgressScreen()
 }
 
-#Preview("Circular Progress") {
-    ManualProgressScreen(progressType: .circular)
-}
-
-#Preview("Custom Progress") {
-    ManualProgressScreen(progressType: .customPath(path: .swiftLogo))
-}

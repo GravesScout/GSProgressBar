@@ -70,9 +70,9 @@ struct ProgressScreensView: View {
         .navigationDestination(for: ProgressScreens.self) { screen in
             switch screen {
             case .manual:
-                ManualProgressScreen(progressType: screen.progressType)
+                ManualProgressScreen()
             default:
-                PredefinedProgressScreen(animationType: screen.animationType,progressType: screen.progressType)
+                PredefinedProgressScreen(animationType: screen.animationType)
             }
         }
     }
