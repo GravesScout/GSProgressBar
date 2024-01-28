@@ -24,6 +24,7 @@ GSProgressBar(type: progressType,
               animationType: animationType,
               trackLineWidth: trackLineWidth,
               fillLineWidth: fillLineWidth,
+              showShadow: true,
               play: $play) { currentProgress in
                     progress = currentProgress
                 }.frame(width: 150, height: 150)
@@ -40,6 +41,7 @@ GSProgressBar(type: progressType,
  GSManualProgressBar(type: progressType,
                      trackLineWidth: trackLineWidth,
                      fillLineWidth: fillLineWidth,
+                     showShadow: true,
                      progress: $progress)
                 .frame(width: 150)
 ```
@@ -85,6 +87,7 @@ GSProgressBar(type: .bar,
               animationType: .linear(duration: 4.25),
               trackLineWidth: trackLineWidth,
               fillLineWidth: fillLineWidth,
+              showShadow: true,
               play: $play)
 ```
 
@@ -98,6 +101,7 @@ GSProgressBar(type: .circular,
                       GSProgressSectionMetadata(duration: 5, sectionProportionValue: 0.1)]),
               trackLineWidth: trackLineWidth,
               fillLineWidth: fillLineWidth,
+              showShadow: true,
               play: $play)
 ```
 
@@ -111,6 +115,7 @@ GSProgressBar(type: .customPath(path: .swiftLogo),
                       sectionsDelay: GSRandomizedDelay.randomizedDelay(delayRange: 0.4...5))),
               trackLineWidth: trackLineWidth,
               fillLineWidth: fillLineWidth,
+              showShadow: true,
               play: $play)
 ```
 ## Installation
