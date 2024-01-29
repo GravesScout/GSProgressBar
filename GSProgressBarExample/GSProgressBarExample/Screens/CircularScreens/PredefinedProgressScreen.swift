@@ -22,7 +22,7 @@ struct PredefinedProgressScreen: View {
         VStack(spacing: 40) {
             VStack(spacing: 10, content: {
                 Text("\(barProgress)")
-                GSProgressBar(type: .bar,
+                GSPredefinedProgressBar(type: .bar,
                               animationType: animationType,
                               trackLineWidth: lineWidth,
                               fillLineWidth: lineWidth - 2,
@@ -33,7 +33,7 @@ struct PredefinedProgressScreen: View {
             })
             
             ZStack {
-                GSProgressBar(type: .circular,
+                GSPredefinedProgressBar(type: .circular,
                               animationType: animationType,
                               trackLineWidth: lineWidth,
                               fillLineWidth: lineWidth - 2,
@@ -46,7 +46,7 @@ struct PredefinedProgressScreen: View {
             
             VStack(spacing: 10, content: {
                 Text("\(customProgress)")
-                GSProgressBar(type: .customPath(path: .swiftLogo),
+                GSPredefinedProgressBar(type: .customPath(path: .swiftLogo),
                               animationType: animationType,
                               trackLineWidth: customLineWidth,
                               fillLineWidth: customLineWidth - 2,

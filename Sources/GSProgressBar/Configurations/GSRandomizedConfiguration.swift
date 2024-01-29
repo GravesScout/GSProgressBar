@@ -7,7 +7,7 @@
 
 import Foundation
 
-///  This struct configures the ruleset for randomizing the progress of a ``GSProgressBar``
+///  This struct configures the ruleset for randomizing the progress of a ``GSPredefinedProgressBar``
 public struct GSRandomizedConfiguration {
     public let sectionsRange: ClosedRange<Int>
     public let durationRange: ClosedRange<Double>

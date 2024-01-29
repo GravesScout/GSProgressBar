@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// This struct represents the metadata needed to configure a section of a ``GSProgressBar``.
+/// This struct represents the metadata needed to configure a section of a ``GSPredefinedProgressBar``.
 public struct GSProgressSectionMetadata {
     let sectionProportionValue: CGFloat
     let duration: CGFloat
