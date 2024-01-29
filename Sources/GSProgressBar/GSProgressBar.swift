@@ -123,11 +123,11 @@ public struct GSProgressBar: View, Equatable {
 struct GSProgressBarWrapper: View {
     private let progressUpdater: GSProgressUpdater?
     private let type: GSProgressBarType
-    @State private var configuration: GSProgressBarConfiguration
     private let trackLineWidth: CGFloat
     private let fillLineWidth: CGFloat
     @Binding private var play: Bool
     
+    @State private var configuration: GSProgressBarConfiguration
     @State private var animationTicker: Timer.TimerPublisher = .init(interval: 1/60, runLoop: .main, mode: .common)
     @State private var sectionDelayTask: DispatchWorkItem?
 
