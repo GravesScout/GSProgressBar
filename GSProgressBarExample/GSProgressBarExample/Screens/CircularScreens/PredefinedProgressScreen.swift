@@ -1,5 +1,5 @@
 //
-//  PredefinedCircularScreen..swift
+//  PredefinedProgressScreen..swift
 //  GSProgressBarExample
 //
 //  Created by Dor Ditchi on 21/01/2024.
