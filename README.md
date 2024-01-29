@@ -20,7 +20,7 @@ So I made one!
 `play` - a boolean to play or pause the progression.<br>
 
 ```swift
-GSProgressBar(type: progressType,
+GSPredefinedProgressBar(type: progressType,
               animationType: animationType,
               trackLineWidth: trackLineWidth,
               fillLineWidth: fillLineWidth,
@@ -83,7 +83,7 @@ GSProgressBar(type: progressType,
 ## Examples
 ### <ins>A linear duration bar type progress bar:</ins>
 ```swift
-GSProgressBar(type: .bar,
+GSPredefinedProgressBar(type: .bar,
               animationType: .linear(duration: 4.25),
               trackLineWidth: trackLineWidth,
               fillLineWidth: fillLineWidth,
@@ -93,7 +93,7 @@ GSProgressBar(type: .bar,
 
 ### <ins>A sectioned circular type progress bar:</ins>
 ```swift
-GSProgressBar(type: .circular,
+GSPredefinedProgressBar(type: .circular,
               animationType: .sectioned(
                   sections: [
                       GSProgressSectionMetadata(duration: 3, sectionProportionValue: 0.3, sectionDelay: 2),
@@ -107,7 +107,7 @@ GSProgressBar(type: .circular,
 
 ### <ins>A randomized customPath type progress bar:</ins>
 ```swift
-GSProgressBar(type: .customPath(path: .swiftLogo),
+GSPredefinedProgressBar(type: .customPath(path: .swiftLogo),
               animationType: .randomized(
                   configuration: .init(
                       sectionsRange: 5...8,
