@@ -2,7 +2,7 @@
 //  GSPredefinedProgressBar.swift
 //
 //
-//  Created by Dor Ditchi on 29/01/2024.
+//  Created by Graves Scout on 29/01/2024.
 //
 
 import SwiftUI

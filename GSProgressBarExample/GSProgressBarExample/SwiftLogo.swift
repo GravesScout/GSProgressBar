@@ -2,7 +2,7 @@
 //  SwiftLogo.swift
 //  GSProgressBarExample
 //
-//  Created by Dor Ditchi on 22/01/2024.
+//  Created by Graves Scout on 22/01/2024.
 //
 
 import SwiftUI

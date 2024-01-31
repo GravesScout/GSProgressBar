@@ -2,7 +2,7 @@
 //  GSLinearProgressBar.swift
 //
 //
-//  Created by Dor Ditchi on 21/01/2024.
+//  Created by Graves Scout on 21/01/2024.
 //
 
 import SwiftUI
